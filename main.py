@@ -56,7 +56,6 @@ NAStr = str(NAResetTimer)
 
 #youtube_dl configs \/
 youtube_dl.utils.bug_reports_message = lambda: ''
-
 ytdl_format_options = {
     'format': 'bestaudio/best',
     'restrictfilenames': True,
@@ -69,13 +68,10 @@ ytdl_format_options = {
     'default_search': 'auto',
     'source_address': '0.0.0.0' # bind to ipv4 since ipv6 addresses cause issues sometimes
 }
-
 ffmpeg_options = {
     'options': '--rm-cache-dir'
 }
-
 ytdl = youtube_dl.YoutubeDL(ytdl_format_options)
-
 class YTDLSource(discord.PCMVolumeTransformer):
     def __init__(self, source, *, data, volume=0.5):
         super().__init__(source, volume)
@@ -92,6 +88,10 @@ class YTDLSource(discord.PCMVolumeTransformer):
             data = data['entries'][0]
         filename = data['title'] if stream else ytdl.prepare_filename(data)
         return filename
+
+
+
+
 #youtube_dl end config ^
 
 
@@ -115,6 +115,7 @@ async def join(ctx):
 async def leave(ctx):
     await ctx.voice_client.disconnect()
 
+#not working due to ffmpeg not supported in repl.it \/
 @bot.command()
 async def anya(ctx,url="https://www.youtube.com/watch?v=s5GLU4xZDgo&ab_channel=Animeiko"):
     try :
@@ -131,6 +132,7 @@ async def anya(ctx,url="https://www.youtube.com/watch?v=s5GLU4xZDgo&ab_channel=A
   
 
 #lek bot e tangi
+
 @bot.event
 async def on_ready():
     otities = bot.get_channel(999239717155512342)
