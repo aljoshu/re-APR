@@ -71,7 +71,7 @@ ytdl_format_options = {
 }
 
 ffmpeg_options = {
-    'options': '-vn'
+    'options': '--rm-cache-dir'
 }
 
 ytdl = youtube_dl.YoutubeDL(ytdl_format_options)
@@ -124,9 +124,10 @@ async def anya(ctx,url="https://www.youtube.com/watch?v=s5GLU4xZDgo&ab_channel=A
         async with ctx.typing():
             filename = await YTDLSource.from_url(url, loop=bot.loop)
             voice_channel.play(discord.FFmpegPCMAudio(executable="ffmpeg.exe", source=filename))
-        #await ctx.send('**Now playing:** {}'.format(filename))
+        await ctx.send('**Now playing:** {}'.format(filename))
     except:
         await ctx.send("The bot is not connected to a voice channel.")
+        raise
   
 
 #lek bot e tangi
